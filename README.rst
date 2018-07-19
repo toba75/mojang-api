@@ -44,39 +44,61 @@ Using this API will often return dicts:
 
 
 Checking status of Mojang servers:
+
 ``$ from mojang_api import get_status``
+
 ``$ response = get_status() ``
 
 Response will be dict containing a Requests Response object and Response Data.
+
 Response['response'] contains Response object (Get status code via Response['response'].status_code)
+
 Response['data'] contains List of dicts with key of the servername and value of it's status
 
 Getting UUID from player name:
+
 ``$ from mojang_api import Player``
+
 ``$ player = Player(username=myUsername)``
+
 ``$ player.username``
 
 Authenticating player:
+
 ``$ from mojang_api import Player``
+
 ``$ player = Player(username=myUsername)``
+
 ``$ player.authenticate(email_address_or_legacy_username, password)``
+
 
 Player authenticate will populate it's Access and Client Tokens, Username and UUID of the player.
 
+
 Check if player is authenticated with:
+
 ``$ player.is_authenticated``
 
+
 Creating Player with access and client tokens:
+
 ``$ from mojang_api import Player``
+
 ``$ player=Player(username=Last_saved_username)``
+
 ``$ player.tokens = (access_token, client_token)``
 
 Once player.tokens is set, it will validate and refresh tokens and save the current Username, UUID, and refreshed Access and Client Tokens
 
+
 Signing out Player:
+
 ``$ from mojang_api import Player``
+
 ``$ player = Player(username=myUsername)``
+
 ``$ player.authenticate(email_address_or_legacy_username, password)``
+
 ``$ player.signout()``
 
 player.signout() will invalidate the tokens that are saved, which has the same effect as logging out.
