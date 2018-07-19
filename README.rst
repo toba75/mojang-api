@@ -1,9 +1,10 @@
 mojang-api
 ==========
 
-|build-status| |code-coverage| |python-versions| |implementation| |license|
+|python-versions| |implementation| |license|
 
 A full Python wrapper of Mojang's `API`_ and `Authentication API`_.
+
 version:3.0.1
 
 .. |version| image:: https://img.shields.io/pypi/v/mojang-api.svg
@@ -43,7 +44,7 @@ Using this API will often return dicts:
         Response['data'] contains response data
 
 
-Checking status of Mojang servers:
+**Checking status of Mojang servers:**
 
 ``$ from mojang_api import get_status``
 
@@ -55,7 +56,7 @@ Response['response'] contains Response object (Get status code via Response['res
 
 Response['data'] contains List of dicts with key of the servername and value of it's status
 
-Getting UUID from player name:
+**Getting UUID from player name:**
 
 ``$ from mojang_api import Player``
 
@@ -63,7 +64,7 @@ Getting UUID from player name:
 
 ``$ player.username``
 
-Authenticating player:
+**Authenticating player:**
 
 ``$ from mojang_api import Player``
 
@@ -75,12 +76,12 @@ Authenticating player:
 Player authenticate will populate it's Access and Client Tokens, Username and UUID of the player.
 
 
-Check if player is authenticated with:
+**Check if player is authenticated with:**
 
 ``$ player.is_authenticated``
 
 
-Creating Player with access and client tokens:
+**Creating Player with access and client tokens:**
 
 ``$ from mojang_api import Player``
 
@@ -91,7 +92,7 @@ Creating Player with access and client tokens:
 Once player.tokens is set, it will validate and refresh tokens and save the current Username, UUID, and refreshed Access and Client Tokens
 
 
-Signing out Player:
+**Signing out Player:**
 
 ``$ from mojang_api import Player``
 
