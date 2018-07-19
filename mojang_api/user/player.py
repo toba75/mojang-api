@@ -43,9 +43,16 @@ class Player:
                 return True, resp
         return False, resp
 
+    def signout(self):
+        if self.is_authenticated:
+            return invalidate_access_token(self._access_token, self._client_token)['response'].status_code == 204
+        return False
+
     @property
     def is_authenticated(self):
-        return self._access_token != None
+        if self._access_token != None and self._client_token != None != None:
+            return self.valid_tokens()
+        return false
 
     @property
     def username(self):
@@ -83,24 +90,34 @@ class Player:
     def access_token(self):
         return self._access_token
 
-    def valid_tokens(self, tokens):
+    @tokens.setter
+    def tokens(self, tokens):
         if tokens and len(tokens)==2 and tokens[0] and tokens[1]:
-            resp = validate_access_token(tokens[0], tokens[1])
-            if resp['response'].status_code == 204:
-                self._access_token = tokens[0]
-                self._client_token = tokens[1]
-                resp = refresh_access_token(self._access_token, self._client_token, request_user=True)
-                print(resp,'\n', resp['response'].status_code==200)
-                if resp['response'].status_code == 200:
-                    data=resp['data']
-                    self._access_token = data['accessToken']
-                    self._client_token = data['clientToken']
-                    self._username = data['selectedProfile']['name']
-                    self._uuid = data['selectedProfile']['id']
-                    return resp
+            if self._valid_tokens(tokens[0], tokens[1]):
+                return self._refresh_tokens(tokens[0], tokens[1])
         else:
             del self.access_token
             del self.client_token
+        return None
+
+    def valid_tokens(self):
+        return self._valid_tokens(self._access_token, self._client_token)
+
+    def _valid_tokens(self, accessToken, clientToken):
+        return validate_access_token(accessToken, clientToken)['response'].status_code==204
+
+    def refresh_tokens(self):
+        return self._refresh_tokens(self._access_token, self._client_token)
+
+    def _refresh_tokens(self, access_token, client_token):
+        resp = refresh_access_token(access_token, client_token, request_user=True)
+        if resp['response'].status_code == 200:
+            data=resp['data']
+            self._access_token = data['accessToken']
+            self._client_token = data['clientToken']
+            self._username = data['selectedProfile']['name']
+            self._uuid = data['selectedProfile']['id']
+            return resp
         return None
 
     @access_token.deleter

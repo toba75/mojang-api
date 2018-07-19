@@ -10,12 +10,12 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as readme:
     long_description = readme.read()
 
 setup(
-    name='mojang-api',
-    version='2.1.0',
+    name='mojang-api-3',
+    version='3.0.1',
     description='A full Python wrapper of Mojang\'s API and Authentication API.',
     long_description=long_description,
-    url='https://github.com/SynchronousX/mojang-api',
-    author='Synchronous',
+    url='https://github.com/Kiln707/mojang-api',
+    author='Synchronous, Kiln707',
     license='MIT',
     classifiers=[
         'Development Status :: 4 - Beta',
