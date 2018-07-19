@@ -5,13 +5,6 @@ mojang-api
 
 A full Python wrapper of Mojang's `API`_ and `Authentication API`_.
 
-version:3.0.1
-
-.. |version| image:: https://img.shields.io/pypi/v/mojang-api.svg
-    :alt: Version
-    :scale: 100%
-    :target: https://pypi.python.org/pypi/mojang-api
-
 .. |python-versions| image:: https://img.shields.io/pypi/pyversions/mojang-api.svg
     :alt: Python Versions
     :scale: 100%
@@ -29,6 +22,10 @@ version:3.0.1
 
 .. _API: http://wiki.vg/Mojang_API
 .. _Authentication API: http://wiki.vg/Authentication
+
+
+
+version:3.0.4
 
 Installation
 ------------

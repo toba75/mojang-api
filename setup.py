@@ -11,7 +11,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as readme:
 
 setup(
     name='mojang-api-3',
-    version='3.0.1',
+    version='3.0.4',
     description='A full Python wrapper of Mojang\'s API and Authentication API.',
     long_description=long_description,
     url='https://github.com/Kiln707/mojang-api',

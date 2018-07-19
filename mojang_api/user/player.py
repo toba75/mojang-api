@@ -50,9 +50,9 @@ class Player:
 
     @property
     def is_authenticated(self):
-        if self._access_token != None and self._client_token != None != None:
+        if self._access_token != None and self._client_token != None:
             return self.valid_tokens()
-        return false
+        return False
 
     @property
     def username(self):
@@ -89,6 +89,10 @@ class Player:
     @property
     def access_token(self):
         return self._access_token
+
+    @property
+    def tokens(self):
+        return (self._access_token, self.clientToken)
 
     @tokens.setter
     def tokens(self, tokens):
