@@ -2,9 +2,7 @@
 
 from requests import delete, get, post, put
 
-from . import sessionserver
 from .._common.endpoint import BaseURL, Endpoint
-from .._common.player import accept_player
 from .._common.response import APIResponse
 
 
@@ -18,12 +16,7 @@ class APIEndpoint(Endpoint):
     RESET_SKIN = '/user/profile/{uuid}/skin'
     STATISTICS = '/orders/statistics'
 
-
-@accept_player(1)
 def get_uuid(player, timestamp=None):
-    if not player.username and player.uuid:
-        player.username = sessionserver.get_user_profile(player).name
-
     params = {
         'at': timestamp
     }
@@ -31,35 +24,12 @@ def get_uuid(player, timestamp=None):
         username=player.username), params=params)
     return APIResponse(response)
 
-
-@accept_player(1)
 def get_username_history(player):
-    if not player.uuid and player.username:
-        player.uuid = get_uuid(player).id
-
     response = get(
         APIEndpoint.UUID_TO_USERNAME_HISTORY.url.format(uuid=player.uuid))
     return APIResponse(response)
 
-
-@accept_player(None)
-def get_uuids(*players):
-    usernames = []
-    for player in players:
-        if not player.username and player.uuid:
-            player.username = sessionserver.get_user_profile(player).name
-
-        usernames.append(player.username)
-
-    response = post(APIEndpoint.USERNAMES_TO_UUIDS.url, json=usernames)
-    return APIResponse(response)
-
-
-@accept_player(1)
 def change_skin(player, access_token, skin_url, slim_model=False):
-    if not player.uuid and player.username:
-        player.uuid = get_uuid(player).id
-
     headers = {
         'Authorization': 'Bearer ' + access_token
     }
@@ -71,12 +41,7 @@ def change_skin(player, access_token, skin_url, slim_model=False):
         uuid=player.uuid), headers=headers, data=payload)
     return APIResponse(response)
 
-
-@accept_player(1)
 def upload_skin(player, access_token, path_to_skin, slim_model=False):
-    if not player.uuid and player.username:
-        player.uuid = get_uuid(player).id
-
     headers = {
         'Authorization': 'Bearer ' + access_token
     }
@@ -88,12 +53,7 @@ def upload_skin(player, access_token, path_to_skin, slim_model=False):
         uuid=player.uuid), headers=headers, files=files)
     return APIResponse(response)
 
-
-@accept_player(1)
 def reset_skin(player, access_token):
-    if not player.uuid and player.username:
-        player.uuid = get_uuid(player).id
-
     headers = {
         'Authorization': 'Bearer ' + access_token
     }

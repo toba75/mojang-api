@@ -4,7 +4,6 @@ from requests import get
 
 from . import api
 from .._common.endpoint import BaseURL, Endpoint
-from .._common.player import accept_player
 from .._common.response import APIResponse
 
 
@@ -14,11 +13,7 @@ class SessionserverEndpoint(Endpoint):
     BLOCKED_SERVERS = '/blockedservers'
 
 
-@accept_player(1)
 def get_user_profile(player):
-    if not player.uuid and player.username:
-        player.uuid = api.get_uuid(player).id
-
     response = get(
         SessionserverEndpoint.UUID_TO_PROFILE.url.format(uuid=player.uuid))
     return APIResponse(response)
