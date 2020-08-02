@@ -14,7 +14,7 @@ setup(
     version='3.0.4',
     description='A full Python wrapper of Mojang\'s API and Authentication API.',
     long_description=long_description,
-    url='https://github.com/Kiln707/mojang-api',
+    url='https://github.com/toba75/mojang-api',
     author='Synchronous, Kiln707',
     license='MIT',
     classifiers=[
