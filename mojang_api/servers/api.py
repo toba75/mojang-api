@@ -12,6 +12,7 @@ class APIEndpoint(Endpoint):
     UUID_TO_USERNAME_HISTORY = '/user/profiles/{uuid}/names'
     USERNAMES_TO_UUIDS = '/profiles/minecraft'
     CHANGE_SKIN = '/user/profile/{uuid}/skin'
+    CHANGE_NAME = '/user/profile/{uuid}/name'
     UPLOAD_SKIN = '/user/profile/{uuid}/skin'
     RESET_SKIN = '/user/profile/{uuid}/skin'
     STATISTICS = '/orders/statistics'
@@ -38,6 +39,18 @@ def change_skin(player, access_token, skin_url, slim_model=False):
         'url': skin_url
     }
     response = post(APIEndpoint.CHANGE_SKIN.url.format(
+        uuid=player.uuid), headers=headers, data=payload)
+    return APIResponse(response)
+
+def change_name(player, access_token, newname, password):
+    headers = {
+        'Authorization': 'Bearer ' + access_token
+    }
+    payload = {
+        'name': newname,
+        'password': password
+    }
+    response = post(APIEndpoint.CHANGE_NAME.url.format(
         uuid=player.uuid), headers=headers, data=payload)
     return APIResponse(response)
 

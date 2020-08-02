@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from ..servers.api import (get_uuid, get_username_history, change_skin, upload_skin, reset_skin)
+from ..servers.api import (get_uuid, get_username_history, change_skin, change_name, upload_skin, reset_skin)
 from ..servers.authserver import (authenticate_user, invalidate_access_token,
                                  refresh_access_token, signout_user,
                                  validate_access_token)
